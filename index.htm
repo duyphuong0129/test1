@@ -1,0 +1,47 @@
+<!-- AWP_In_Variable Name='"webdata".triangleWave' -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Javascript Example</title>
+      <script src="jquery-2.0.2.min.js"></script>
+	  <meta http-equiv="refresh" content="0.1" >   <!-- meta tag refreshes page every second -->
+    </head>
+	<!-- =====================================================-->
+	
+    <body>
+	
+      <label id="triangleWave" name="triangleWave">:="webdata".triangleWave:</label>
+      </br>
+	  
+	  
+	  
+      <input id='setvar' type="text" /><button>Modify</button>
+	  
+     <p><img src="logo-DMC.png" alt="DMC Logo"><p/>
+    </body>
+ 
+    <script type="text/javascript">
+    $(document).ready(function(){
+        //query the trianglewave variable every second
+        $.ajaxSetup({ cache: false });
+        setInterval(function() {
+            $.get("IOtriangleWave.htm", function(result){
+                $('#triangleWave').text(result);
+                });
+        },1000);
+         
+        //modify the triangleWave value
+                $("button").click(function(){
+                    url="IOtriangleWave.htm";
+                    name='"webdata".triangleWave';
+                    val=$('input[id=setvar]').val();
+                    sdata=escape(name)+'='+val;
+                    $.post(url,sdata,function(result){});
+                });
+ 
+    });
+    </script>
+ 
+</html>
